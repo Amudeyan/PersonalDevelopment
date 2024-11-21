@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "prod"
+
+build:
+  version: "1.0"
+
+accounts:
+  name: "application in Prod Profile"
+  contactDetails:
+    email: "amudeyan.k"
+    phone : "+91 6372839392"
+  landLine:
+    - "(33) 43 454"
+    -  "(33) 43 454"

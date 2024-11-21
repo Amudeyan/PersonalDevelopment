@@ -1,0 +1,12 @@
+
+build:
+  version: "2.0"
+
+accounts:
+  name: "Accounts in QA"
+  contactDetails:
+    email: "2b4b6d037dafbe1de14efa6933cb032f0f7339d4c265a1c21b2de08021a381d0"
+    phone : "+91 6372839392"
+  landLine:
+    - "(33) 43 454"
+    -  "(33) 43 454"

@@ -1,0 +1,37 @@
+#spring.application.name=microservices
+sever:
+  port: 8080
+spring:
+  datasource:
+    url : jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  output:
+    ANSI:
+      enabled: ALWAYS
+  h2:
+  console:
+    enabled : true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  profiles:
+    active:
+      - "qa"
+  config:
+    import:
+      - "application.qa.yml"
+      - "application.prod.yml"
+build:
+  version: "3.0"
+
+accounts:
+  name: "UAT"
+  contactDetails:
+    email: "amudeyan.k"
+    phone : "+91 6372839392"
+  landLine:
+    - "(33) 43 454"
+    -  "(33) 43 454"

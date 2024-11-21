@@ -1,0 +1,103 @@
+services:
+  rabbit:
+    image: rabbitmq:3.13-management
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics check_port_connectivity
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - "amudeyan"
+
+  configserver:
+    image: "amudeyan/configserver:s6"
+    container_name: configserver_ms
+    ports:
+      - "8071:8071"
+#      - "8072:8071"
+    depends_on:
+      rabbit:
+        condition: service_healthy
+    healthcheck:
+      test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - amudeyan
+    environment:
+      SPRING_RABBITMQ_HOST: "rabbit"
+  accounts:
+    image: "amudeyan/accounts:s6"
+    container_name : accounts_ms
+    ports:
+      - "8080:8080"
+#      - "8081:8080"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory : 700m
+    networks:
+      - amudeyan
+    environment:
+      SPRING_APPLICATION_NAME : "accounts"
+      SPRING_CONFIG_IMPORT : "configserver:http://configserver:8071/"
+      SPRING_RABBITMQ_HOST: "rabbit"
+      SPRING_PROFILES_ACTIVE: default
+
+  cards:
+    image: "amudeyan/cards:s6"
+    container_name: cards_ms
+    ports:
+      - "9000:9000"
+#      - "9001:9000"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - amudeyan
+    environment:
+      SPRING_APPLICATION_NAME: "cards"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_PROFILES_ACTIVE: default
+      SPRING_RABBITMQ_HOST: "rabbit"
+  loans:
+    image: "amudeyan/loans:s6"
+    container_name: loans_ms
+    ports:
+      - "8090:8090"
+#      - "8091:8090"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 700m
+    networks:
+      - amudeyan
+    environment:
+      SPRING_APPLICATION_NAME: "loans"
+      SPRING_RABBITMQ_HOST: "rabbit"
+      SPRING_CONFIG_IMPORT: "configserver:http://configserver:8071/"
+      SPRING_PROFILES_ACTIVE: default
+networks:
+  amudeyan:
+    driver: "bridge"

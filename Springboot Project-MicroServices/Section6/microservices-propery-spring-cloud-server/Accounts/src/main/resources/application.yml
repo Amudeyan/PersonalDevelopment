@@ -1,0 +1,38 @@
+
+sever:
+  port: 8080
+spring:
+  application:
+    name: "accounts"
+  datasource:
+    url : jdbc:h2:mem:testdb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  output:
+    ANSI:
+      enabled: ALWAYS
+  h2:
+  console:
+    enabled : true
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  profiles:
+    active:
+      - "qa"
+  config:
+    import:  "optional:configserver:http://localhost:8071"
+#  To disable this check, set spring.cloud.config.enabled=false or
+#  spring.cloud.config.import-check.enabled=false.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+rabbitmq:
+  host: "localhost"
+  port: 5672
+  username: "guest"
+  password: "guest"

@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+build:
+  version: "2.0"
+
+cards:
+  name: "application in QA Profile"
+  contactDetails:
+    email: "amudeyan.k"
+    phone : "+91 6372839392"
+  landLine:
+    - "(33) 43 454"
+    -  "(33) 43 454"

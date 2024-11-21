@@ -1,0 +1,35 @@
+
+sever:
+  port: 8080
+spring:
+  application:
+    name: "accounts"
+  datasource:
+    url : jdbc:mysql://localhost:3306/accountsdb
+    username: root
+    password: root
+  output:
+    ANSI:
+      enabled: ALWAYS
+  jpa:
+    show-sql: true
+  sql:
+    init:
+      mode: always
+  profiles:
+    active:
+      - "qa"
+  config:
+    import:  "optional:configserver:http://localhost:8071"
+#  To disable this check, set spring.cloud.config.enabled=false or
+#  spring.cloud.config.import-check.enabled=false.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+#rabbitmq:
+#  host: "localhost"
+#  port: 5672
+#  username: "guest"
+#  password: "guest"

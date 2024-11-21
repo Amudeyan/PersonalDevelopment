@@ -1,0 +1,41 @@
+server:
+  port : 8072
+spring:
+  application:
+    name: "apigateway"
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled : false
+management:
+  endpoints:
+    web:
+      exposure:
+        include : "*"
+  info:
+    env:
+      enabled: true
+  endpoint:
+    gateway:
+      enabled : true
+      lowerCaseServiceId: true
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+info:
+  app:
+    name: "apigateway"
+    description: "apigateway Application"
+    version: "1.0.0"
+logging:
+  level:
+    filter: DEBUG
