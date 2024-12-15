@@ -3,11 +3,20 @@ spring:
     name: "configserver"
   profiles:
     active: native
+#  cloud:
+#    config:
+#      server:
+#        native:
+#          search-locations: "classpath:/config"
   cloud:
     config:
       server:
-        native:
-          search-locations: "classpath:/config"
+        git:
+          uri: "https://github.com/Amudeyan/PersonalDevelopment/tree/5870187f9518e3ba2af3f8f47b945aa55b260a3d/Springboot%20Project-MicroServices/Section6/microservices-propery-spring-cloud-server/cloud/cloud/src/main/resources/config"
+          default-label: "main"
+          timeout: 10
+          force-pull: true
+          clone-on-start: true
 server:
   port: 8071
 encrypt:
