@@ -1,6 +1,6 @@
 services:
   configserver:
-    image: "amudeyan/configserver:s9"
+    image: "amudeyan/configserver:s12"
     container_name: configserver_ms
     ports:
       - "8071:8071"
@@ -18,7 +18,7 @@ services:
     networks:
       - amudeyan
   eurekaserver:
-    image: "amudeyan/eurekaserver:s9"
+    image: "amudeyan/eurekaserver:s12"
     container_name: eurekaserver_ms
     healthcheck:
       test: "curl --fail --silent localhost:8070/actuator/health/readiness | grep UP || exit 1"
@@ -44,7 +44,7 @@ services:
       SPRING_PROFILES_ACTIVE: default
 
   accounts:
-    image: "amudeyan/accounts:s9"
+    image: "amudeyan/accounts:s12"
     container_name : accounts_ms
     healthcheck:
       test: "curl --fail --silent localhost:8080/actuator/health/readiness | grep UP || exit 1"
@@ -73,7 +73,7 @@ services:
       SPRING_PROFILES_ACTIVE: default
 
   cards:
-    image: "amudeyan/cards:s9"
+    image: "amudeyan/cards:s12"
     container_name: cards_ms
     healthcheck:
       test: "curl --fail --silent localhost:9000/actuator/health/readiness | grep UP || exit 1"
@@ -101,7 +101,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
       SPRING_PROFILES_ACTIVE: default
   loans:
-    image: "amudeyan/loans:s9"
+    image: "amudeyan/loans:s12"
     container_name: loans_ms
     healthcheck:
       test: "curl --fail --silent localhost:8090/actuator/health/readiness | grep UP || exit 1"
@@ -129,7 +129,7 @@ services:
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: "http://eurekaserver:8070/eureka/"
       SPRING_PROFILES_ACTIVE: default
   apigateway:
-    image: "amudeyan/apigateway:s9"
+    image: "amudeyan/apigateway:s12"
     container_name: apigateway_ms
     ports:
       - "8072:8072"
