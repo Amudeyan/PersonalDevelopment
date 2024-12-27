@@ -21,10 +21,15 @@ management:
         enabled: true
 
 eureka:
+  server:
+    enableReplication: true
+    enable-self-preservation: false
   instance:
     hostname: localhost
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 10
   client:
-    fetchRegistry: false
-    registerWithEureka: false
+    fetchRegistry: true
+    registerWithEureka: true
     serviceUrl:
-     defaultZone: http://localhost:8070/eureka/
+     defaultZone: http://localhost:9070/eureka/
