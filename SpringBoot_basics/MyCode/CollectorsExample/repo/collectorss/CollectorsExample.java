@@ -89,7 +89,7 @@ public class CollectorsExample {
                         Collectors.flatMapping(blog->blog.getComments().stream(),
                                 Collectors.toList())));
         authorComments2.entrySet().forEach(System.out::println);
-        Blog blog =new Blog();
+       /* Blog blog =new Blog();
         String ss =null;
         String sss ="";
         System.out.println(sss.isEmpty());
@@ -101,7 +101,7 @@ public class CollectorsExample {
         System.out.println("Source : "+source);
         System.out.println(Optional.ofNullable("").get());
         Optional<String> source1 =  Optional.ofNullable(ss).or(s);
-        System.out.println(source1.get());
+        System.out.println(source1.get());*/
 
 
     }
