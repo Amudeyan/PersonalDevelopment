@@ -11,13 +11,7 @@ public class SampleTwo {
                 .entrySet()
                 .stream().max(Map.Entry.comparingByValue())
         .ifPresent(System.out::println);
-        String p1 = "listen12";
-        String p2 = "silent1";
-        char[] c1 = p1.toCharArray();
-        char[] c2 = p2.toCharArray();
-        Arrays.sort(c1);
-        Arrays.sort(c2);
-        System.out.println("result : "+Arrays.equals(c1, c2));
+
 
         List<Employee> employees = Arrays.asList(
                 new Employee("Aravinth","CSE","Bangalore",50000),
