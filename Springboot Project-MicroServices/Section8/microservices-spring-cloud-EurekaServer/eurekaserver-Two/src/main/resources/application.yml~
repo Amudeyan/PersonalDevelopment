@@ -1,0 +1,35 @@
+server:
+  port: 9070
+spring:
+  application:
+    name: "eurekaservertwo"
+  config:
+    import: "optional:configserver:http://localhost:8071"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  health:
+    readiness-state:
+      enabled : true
+    liveness-state:
+      enabled : true
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+eureka:
+  server:
+    enableReplication: true
+    enable-self-preservation: false
+  instance:
+    hostname: localhost
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 10
+  client:
+    fetchRegistry: true
+    registerWithEureka: true
+    serviceUrl:
+     defaultZone: http://localhost:8070/eureka/
